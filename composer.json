@@ -1,0 +1,22 @@
+{
+  "name": "agrinet/php-compat-check",
+  "description": "PHP compatibility/check tooling for Agrinet workspace",
+  "type": "project",
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^4.0",
+    "phpcompatibility/php-compatibility": "^9.3",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+    "phpstan/phpstan": "^1.11",
+    "php-stubs/wordpress-stubs": "^5.9"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility,vendor/phpcompatibility/phpcompatibility-wp || true"
+    ],
+    "phpcs-compat": "vendor/bin/phpcs -p ./webspace --standard=PHPCompatibility --runtime-set testVersion 8.4",
+    "phpstan": "vendor/bin/phpstan analyse ./webspace --level=5"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

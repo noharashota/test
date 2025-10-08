@@ -1,0 +1,55 @@
+name: PHP 8.4 compatibility checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  phpcs-phpstan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, xml, json, pcntl, pdo, pdo_mysql
+          coverage: none
+
+      - name: Enable composer cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install composer
+        run: |
+          curl -sS https://getcomposer.org/installer | php
+          sudo mv composer.phar /usr/local/bin/composer
+
+      - name: Install PHP tooling (composer install)
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Run PHPCompatibility (phpcs)
+        run: vendor/bin/phpcs -p ./webspace --standard=PHPCompatibility --runtime-set testVersion 8.4 | tee phpcs-output.txt
+
+      - name: Upload phpcs output
+        uses: actions/upload-artifact@v4
+        with:
+          name: phpcs-output
+          path: phpcs-output.txt
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse ./webspace --level=5 | tee phpstan-output.txt
+
+      - name: Upload phpstan output
+        uses: actions/upload-artifact@v4
+        with:
+          name: phpstan-output
+          path: phpstan-output.txt

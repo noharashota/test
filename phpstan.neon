@@ -1,0 +1,18 @@
+parameters:
+  level: 5
+  paths:
+    - %currentWorkingDirectory%/webspace
+  excludePaths:
+    - %currentWorkingDirectory%/webspace/wp-content/cache
+    - %currentWorkingDirectory%/vendor
+  # If you have WordPress stubs installed via composer, autoload them
+  bootstrapFiles:
+    - %currentWorkingDirectory%/vendor/php-stubs/wordpress-stubs/bootstrap.php
+  # If you generated a baseline, uncomment and set the path below
+  # baseline: %currentWorkingDirectory%/phpstan-baseline.neon
+
+# You can generate a baseline and commit it to ignore existing errors:
+# vendor/bin/phpstan analyse --generate-baseline=phpstan-baseline.neon
+
+includes:
+  # add phpstan extensions here if installed

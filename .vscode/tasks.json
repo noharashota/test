@@ -1,0 +1,36 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "PHPCompatibility (phpcs)",
+      "type": "shell",
+      "command": "${workspaceFolder}/vendor/bin/phpcs",
+      "args": [
+        "-p",
+        "${workspaceFolder}/webspace",
+        "--standard=PHPCompatibility",
+        "--runtime-set",
+        "testVersion",
+        "8.4"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "PHPStan analyse",
+      "type": "shell",
+      "command": "${workspaceFolder}/vendor/bin/phpstan",
+      "args": [
+        "analyse",
+        "${workspaceFolder}/webspace",
+        "--level=5"
+      ],
+      "group": "test",
+      "presentation": {
+        "reveal": "always"
+      }
+    }
+  ]
+}

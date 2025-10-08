@@ -1,0 +1,16 @@
+{
+  "php.validate.enable": true,
+  "php.validate.executablePath": "php",
+  "intelephense.files.associations": [
+    "**/webspace/**/*.php"
+  ],
+  "phpcs.enable": true,
+  "phpcs.executablePath": "${workspaceFolder}/vendor/bin/phpcs",
+  "phpcs.standard": "PHPCompatibility",
+  "phpcs.args": [
+    "--runtime-set",
+    "testVersion",
+    "8.4"
+  ],
+  "phpstan.executablePath": "${workspaceFolder}/vendor/bin/phpstan"
+}

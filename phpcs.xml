@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<ruleset name="Project PHPCompatibility">
+  <description>PHPCompatibility checks for PHP 8.4 with WordPress specific rules.</description>
+
+  <!-- Use Composer installer or set installed_paths to vendor/phpcompatibility/php-compatibility -->
+  <rule ref="PHPCompatibility"/>
+  <rule ref="PHPCompatibilityWP"/>
+
+  <!-- Set target test version -->
+  <config name="testVersion" value="8.4"/>
+
+  <!-- Exclude vendor and assets -->
+  <exclude-pattern>*/vendor/*</exclude-pattern>
+  <exclude-pattern>*/node_modules/*</exclude-pattern>
+  <exclude-pattern>*/wp-content/cache/*</exclude-pattern>
+
+  <!-- Optional: lower noise by excluding long-lived legacy directories if needed -->
+  <!-- <exclude-pattern>./webspace/some_legacy_path/*</exclude-pattern> -->
+
+</ruleset>
